@@ -1,0 +1,96 @@
+<html>
+	<head>
+		<title>Money Monkey</title>
+		<link href="style.css" rel="stylesheet">
+		<!--<link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
+		<link href='vuetify.min.css' rel='stylesheet' type='text/css'>-->
+	</head>
+
+	<body>
+
+		<div v-cloak id="app" class="container">
+            <h2>Expenses</h2>
+            
+			{{ message }}
+
+			
+
+		<div class="row">
+
+		<form @submit.prevent>
+
+			<input ref="descriptionRef" v-model="description" type="text" placeholder="Description">
+
+            <input ref="amountRef" v-model="amount" type="text" placeholder="Amount">
+            
+            <input class='quantity' ref='quantityRef' v-model='quantity' type='text' placeholder='Quantity'>
+
+			<div v-cloak v-if="!valid.description">
+				<b>Enter a valid description</b>
+			</div>
+
+			<div v-cloak v-if="!valid.amount">
+				<b>Enter a valid amount</b>
+            </div>
+            
+            <div v-cloak v-if='!valid.quantity'>
+                <b>Enter a valid quantity</b>
+            </div>
+
+		<button class='save' @click="saveExpense"></button>
+		<button class='clear' @click="clear"></button>
+
+		</form>
+
+		<h3>Total Expenses <span id="total">${{ total.toLocaleString() }}</span></h3>
+
+		</div>
+
+		<div id="expenses" v-if="expenses.length">
+
+			<table>
+				<tr>
+					<th>Description</th>
+					<th>Amount</th>
+                    <th>Date</th>
+                    <th>Quantity</th>
+                    <th>Actions</th>
+                    
+				</tr>
+				<tr v-for="expense in expenses">
+					<td>
+						{{ expense.description }}
+					</td>
+					<td>
+						${{ expense.amount.toLocaleString() }}
+					</td>
+					<td>
+						{{ expense.date }}
+                    </td>
+                    <td>
+                        {{ expense.quantity }}
+                    </td>
+					<td>
+						<button class='edit' @click="setEditingId(expense._id)"></button>
+						<button class="delete" @click="deleteExpense(expense._id)"></button>
+					</td>
+				</tr>
+			</table>
+
+		</div>
+
+		</div>
+
+		<script src="vue.js"></script>
+		<!--<script src='vuetify.js'></script>-->
+		<script src="moment.js"></script>
+
+
+		<script src="data.js" type="module"></script>
+		<script src="main.js" type="module"></script>
+		<script src="api.js" type="module"></script>
+		
+
+	</body>
+
+</html>
