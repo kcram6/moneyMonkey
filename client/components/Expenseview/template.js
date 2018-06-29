@@ -61,7 +61,7 @@ const template =  `
                             <b>{{ props.item.quantity }}</b>
                         </td>
                         <td class='text-xs-left'>
-                            <b>{{ props.item.date }}</b>
+                            <b>{{ formatDate(props.item.date) }}</b>
                         </td>
                         <td>
                             <v-tooltip bottom>

@@ -2,7 +2,7 @@ const data = () => ({
 	description: '',
     amount: '',
 	quantity:'',
-	loading: true,
+	loading: false,
 	deletingId: null,
 	snackbar: false,
 	snackText:'',
@@ -13,7 +13,6 @@ const data = () => ({
         amount: true,
         quantity: true
 	},
-	expenses: [],
 	headers: [
 		{
 			text:'Selected',
@@ -24,7 +23,7 @@ const data = () => ({
 		{
 			text: 'Description',
 			align: 'left',
-			sortable: 'false',
+			sortable: 'true',
 			value: 'description'
 		},
 		{

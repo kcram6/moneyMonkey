@@ -1,20 +1,12 @@
-
 import data from './data.js'
 import template from './template.js'
 import api from '../../helpers/api.js'
 
 
 const ExpenseView = Vue.component('expense-view', {
+	props: ['expenses'],
 	data,
 	template,
-	created() {
-		api.getExpenses()
-			.then(expenses => {
-				this.expenses = expenses
-				this.loading = false
-			})
-			.catch(e => console.log(e))
-	},
 	watch: {
 		description(val) {
 			if (val !== '')
@@ -48,6 +40,9 @@ const ExpenseView = Vue.component('expense-view', {
 		}
 	},
 	methods: {
+		formatDate(date) {
+			return moment(date).format('MMMM Do, YYYY')
+		},
 		showSnack(message, color) {
 			this.snackColor = color
 			this.snackText = message
@@ -135,7 +130,6 @@ const ExpenseView = Vue.component('expense-view', {
                 amount: Number(this.amount.replace(/,/g, '')),
                 quantity: Number(this.quantity),
 			}
-
 			api.updateExpense(updatedExpense)
 				.then(expense => {
 					const indexOfExpense = this.expenses.findIndex(expense => expense._id === id)
@@ -146,7 +140,6 @@ const ExpenseView = Vue.component('expense-view', {
 		deleteExpense(id) {
 			api.deleteExpense(id)
 				.then(() => this.expenses = this.expenses.filter(expense => expense._id !== id))
-
 			// imperative way
 			/*for(let i = 0; i < this.expenses.length; i++) {
 				if (this.expenses[i].id === id)
@@ -154,11 +147,9 @@ const ExpenseView = Vue.component('expense-view', {
 			}
 			
 		},
-
 		copyExpense(id) {
 			const indexOfExpense = this.expenses.findIndex(expense => expense._id === id)
 			const expense = this.expenses[indexOfExpense]
-
 			api.addExpense({...expense})
 				.then(expense => this.expenses.unshift(expense))
 				.catch(e => console.log(e))
@@ -232,7 +223,7 @@ const ExpenseView = Vue.component('expense-view', {
 			this.expenseId = null
 			this.valid.description = true
 			this.valid.amount = true
-		}
+		},
 	}
 })
 
@@ -240,7 +231,6 @@ const ExpenseView = Vue.component('expense-view', {
 setTimeout(() => {
 	app.message = 'Record an expense'
 }, 2000)
-
 */
 
 export default ExpenseView

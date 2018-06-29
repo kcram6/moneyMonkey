@@ -9,6 +9,8 @@ const template = `
             <h1>&nbsp; {{ message }}</h1>
             &nbsp; &nbsp;<router-link to='/dash'>Home</router-link>
             &nbsp; &nbsp;<router-link to='/about'>About Us</router-link>
+            &nbsp; &nbsp;<router-link to='/stats'>Stats</router-link>
+
             
             
             <v-spacer></v-spacer>
