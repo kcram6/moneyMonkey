@@ -1,5 +1,4 @@
 const data = () => ({
-	message: 'Welcome!',
 	description: '',
     amount: '',
 	quantity:'',
@@ -9,7 +8,6 @@ const data = () => ({
 	snackText:'',
 	snackColor:'black',
 	expenseId: null,
-	theme: 'dark',
 	valid: {
 		description: true,
         amount: true,

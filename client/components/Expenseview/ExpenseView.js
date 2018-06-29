@@ -42,9 +42,7 @@ const ExpenseView = Vue.component('expense-view', {
 		clearButtonVisible() {
 			return this.description !== "" || this.amount !== "" || this.quantity !== "" || this.expenseId !== null
 		},
-		dark() {
-			return this.theme === 'dark'
-		},
+		
 		loadingText() {
 			return this.loading ? '...Loading Expenses' : 'No Expenses :('
 		}
@@ -54,9 +52,6 @@ const ExpenseView = Vue.component('expense-view', {
 			this.snackColor = color
 			this.snackText = message
 			this.snackbar = true
-		},
-		setTheme(theme) {
-			this.theme = theme
 		},
 		validAmount() {
 			return this.amount !== '' && /^[^,]([0-9]{0,3})(,?([0-9]){3})*(\.[0-9]{0,2})?$/.test(this.amount)
