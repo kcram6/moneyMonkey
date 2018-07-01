@@ -81,7 +81,7 @@ const template =  `
 
                             <v-tooltip bottom>
                                     <span slot="activator">
-                                        <v-btn @click='deleteExpense(props.item._id)'outline fab small color='error'><v-icon>delete</v-icon></v-btn>
+                                        <v-btn @click='setDeletingId(props.item._id)'outline fab small color='error'><v-icon>delete</v-icon></v-btn>
                                     </span>
                                     <span>Delete</span>
                                     
