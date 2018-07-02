@@ -4,7 +4,6 @@ import api from '../../helpers/api.js'
 
 
 const ExpenseView = Vue.component('expense-view', {
-	props: ['expenses'],
 	data,
 	template,
 	watch: {
@@ -22,6 +21,9 @@ const ExpenseView = Vue.component('expense-view', {
 		}
 	},
 	computed: {
+		expenses() {
+			return this.$store.state.expenses
+		},
 		total() {
 			// functional way
 			return this.expenses
@@ -155,6 +157,7 @@ const ExpenseView = Vue.component('expense-view', {
 				.catch(e => console.log(e))
 			
 		}, */
+
 		copyExpense(id) {
 			const indexOfExpense = this.expenses.findIndex(expense => expense._id === id)
 			const expense = this.expenses[indexOfExpense]
@@ -167,7 +170,7 @@ const ExpenseView = Vue.component('expense-view', {
 		addExpense() {
 			const expense = {
 				description: this.description,
-				amount: Number(this.amount.replace(/,/g, '')),
+				amount: Number(this.amount.replace(/,/g, '')), 
 				quantity: Number(this.quantity),
 			}
 			api.addExpense(expense)
@@ -195,16 +198,16 @@ const ExpenseView = Vue.component('expense-view', {
 				.catch(e => this.showSnack('Failed to update', 'red'))
 		},
 
-		deleteExpense(id) {
+		/*deleteExpense(id) {
 			api.deleteExpense(id)
 				.then(() => this.expenses = this.expenses.filter(expense => expense._id !== id))
 				.then(() => this.showSnack('Deleted Expense', 'green'))
 				.catch(e => this.showSnack('Failed to delete', 'black'))
-		},
+		},*/
 		
 				
 
-		/*deleteExpense() {
+		deleteExpense() {
 			const indexOfExpense = this.expenses.findIndex(expense => expense._id === this.deletingId)
 			console.log(this.expenses[indexOfExpense].description)
 			api.deleteExpense(this.deletingId)
@@ -214,7 +217,7 @@ const ExpenseView = Vue.component('expense-view', {
 				})
 				.then(() => this.showSnack('Deleted Expense', 'green'))
 				.catch(e => this.showSnack('Failed to delete', 'red'))
-		},*/
+		},
 
 		clear() {
 			this.description = ''

@@ -95,7 +95,7 @@ const template =  `
                                             <v-btn color="error" @click="deleteExpense">Confirm</v-btn>
                                         </v-card-actions>
                                     </v-card>
-                                </v-dialog>		
+                            </v-dialog>		
                                     
                             
                         </td>
@@ -108,7 +108,7 @@ const template =  `
 
 
         </v-content>
-        
+
 
 `
 
