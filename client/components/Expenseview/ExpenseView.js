@@ -186,10 +186,8 @@ const ExpenseView = Vue.component('expense-view', {
 				quantity: Number(this.quantity),
 			}
 
-			api.updateExpense(updatedExpense)
-				.then(expense => {
-					const indexOfExpense = this.expenses.findIndex(expense => expense._id === id)
-					this.expenses.splice(indexOfExpense, 1, expense)
+			this.$store.dispatch(actionTypes.UPDATE_EXPENSE, updatedExpense)
+				.then(() => {
 					this.expenseId = null
 				})
 				.then(this.clear)
