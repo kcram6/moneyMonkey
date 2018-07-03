@@ -163,8 +163,7 @@ const ExpenseView = Vue.component('expense-view', {
 			const indexOfExpense = this.expenses.findIndex(expense => expense._id === id)
 			const expense = this.expenses[indexOfExpense]
 			
-			api.addExpense({ ...expense })
-				.then(expense => this.expenses.unshift(expense))
+			this.$store.dispatch(actionTypes.COPY_EXPENSE, expense)
 				.then(() => this.showSnack('Duplicated Expense', 'green'))
 				.catch(e => this.showSnack('Failed to duplicate', 'red'))
 		},
