@@ -1,6 +1,7 @@
 import data from './data.js'
 import template from './template.js'
 import api from '../../helpers/api.js'
+import * as actionTypes from '../../store/actionTypes.js'
 
 
 const ExpenseView = Vue.component('expense-view', {
@@ -173,8 +174,7 @@ const ExpenseView = Vue.component('expense-view', {
 				amount: Number(this.amount.replace(/,/g, '')), 
 				quantity: Number(this.quantity),
 			}
-			api.addExpense(expense)
-				.then(expense => this.expenses.unshift(expense))
+			this.$store.dispatch(actionTypes.CREATE_EXPENSE, expense)
 				.then(this.clear)
 				.then(() => this.showSnack('Added Expense', 'green'))
 				.catch(e => this.showSnack('Failed to add', 'red'))
@@ -208,13 +208,8 @@ const ExpenseView = Vue.component('expense-view', {
 				
 
 		deleteExpense() {
-			const indexOfExpense = this.expenses.findIndex(expense => expense._id === this.deletingId)
-			console.log(this.expenses[indexOfExpense].description)
-			api.deleteExpense(this.deletingId)
-				.then(() => {
-					this.expenses = this.expenses.filter(expense => expense._id !== this.deletingId)
-					this.deletingId = null
-				})
+			this.$store.dispatch(actionTypes.DELETE_EXPENSE, this.deletingId)
+				.then(() => this.deletingId = null)
 				.then(() => this.showSnack('Deleted Expense', 'green'))
 				.catch(e => this.showSnack('Failed to delete', 'red'))
 		},
