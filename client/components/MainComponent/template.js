@@ -7,9 +7,9 @@ const template = `
                 </v-avatar>
             </v-toolbar-side-icon>
             <h1>&nbsp; {{ message }}</h1>
-            &nbsp; &nbsp;<router-link to='/dash'>Home</router-link>
-            &nbsp; &nbsp;<router-link to='/about'>About Us</router-link>
-            &nbsp; &nbsp;<router-link to='/stats'>Stats</router-link>
+            <router-link to='/dash'><v-btn>Home</v-btn></router-link>
+            <router-link to='/about'><v-btn>About</v-btn></router-link>
+            <router-link to='/stats'><v-btn>Stats</v-btn></router-link>
 
             
             
